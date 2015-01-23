@@ -9,7 +9,7 @@
   <name>MobLimiter</name>
   <url>https://github.com/MCNSA/MobLimiter</url>
 
-  <build> 
+  <build>
     <finalName>MobLimiter</finalName>
     <resources>
       <resource>
