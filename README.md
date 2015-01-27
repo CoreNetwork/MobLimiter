@@ -3,7 +3,7 @@ MobLimiter 3
 
 ## Download
 
-Compile (a Maven project) or download from our [build service](http://build.core-network.us:8080/job/MobLimiter%202/).
+Compile (a Maven project) or download from our [build service](http://build.core-network.us:8080/job/MobLimiter/).
 
 
 ## Configuration
