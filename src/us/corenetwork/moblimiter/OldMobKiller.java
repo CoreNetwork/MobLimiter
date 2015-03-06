@@ -79,14 +79,14 @@ public class OldMobKiller implements Listener {
 					Creature creature = (Creature) mob;
 					
 					EntityType type = mob.getType();
-					if (!hasPlayerTarget(creature) || !affectedMobs.contains(type.getName().toLowerCase()))
+					if (hasPlayerTarget(creature) || !affectedMobs.contains(type.getName().toLowerCase()))
 						continue;
 										
 					int age = mob.getTicksLived();
 														
 					if (age > killTreshold)
 					{
-						if (!hasPlayerTarget(creature) || (!hasStolenArmor(creature) && getNumberOfNearbyMobs(mob) >= nearMobsCount))
+						if (!hasStolenArmor(creature) && getNumberOfNearbyMobs(mob) >= nearMobsCount)
 						{
 							mob.remove();
 						}
