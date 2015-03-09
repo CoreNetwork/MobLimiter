@@ -18,13 +18,16 @@ public class OldMobKiller implements Listener {
 	private static int killTreshold;
 	private static int nearMobsCount;
 	private static int nearMobsSearchRange;
+    private static boolean killAggravatedMobs;
+    private static boolean killNonAggravatedMobs;
+    private static boolean killPickedItemsMobs;
 	
 	public static void init()
 	{
 		loadConfig();
 		
 		Bukkit.getPluginManager().registerEvents(new OldMobKiller(), MobLimiter.instance);
-		
+
 		Bukkit.getScheduler().runTaskTimer(MobLimiter.instance, new MobKillerTimer(), 20, Settings.getInt(Setting.OLD_MOB_KILLER_INTERVAL));
 	}
 	
@@ -38,6 +41,9 @@ public class OldMobKiller implements Listener {
 		killTreshold = Settings.getInt(Setting.OLD_MOB_KILLER_TRESHOLD);
 		nearMobsSearchRange = Settings.getInt(Setting.OLD_MOB_KILLER_NEAR_MOBS_SEARCH_RANGE);
 		nearMobsCount = Settings.getInt(Setting.OLD_MOB_KILLER_NEAR_MOBS_COUNT);
+        killAggravatedMobs = Settings.getBoolean(Setting.OLD_MOB_KILLER_CULL_AGGRAVATED);
+        killNonAggravatedMobs = Settings.getBoolean(Setting.OLD_MOB_KILLER_CULL_NONAGGRAVATED);
+        killPickedItemsMobs = Settings.getBoolean(Setting.OLD_MOB_KILLER_CULL_PICKED_ITEMS);
 	}
 	
 	private static int getNumberOfNearbyMobs(Entity mob)
@@ -79,14 +85,15 @@ public class OldMobKiller implements Listener {
 					Creature creature = (Creature) mob;
 					
 					EntityType type = mob.getType();
-					if (hasPlayerTarget(creature) || !affectedMobs.contains(type.getName().toLowerCase()))
+					if (!affectedMobs.contains(type.getName().toLowerCase()))
 						continue;
 										
 					int age = mob.getTicksLived();
 														
 					if (age > killTreshold)
 					{
-						if (!hasStolenArmor(creature) && getNumberOfNearbyMobs(mob) >= nearMobsCount)
+                        boolean aggravated = hasPlayerTarget(creature);
+						if (((aggravated && killAggravatedMobs) || (!aggravated && killNonAggravatedMobs)) && (killPickedItemsMobs || !hasPlayerTarget(creature)))
 						{
 							mob.remove();
 						}

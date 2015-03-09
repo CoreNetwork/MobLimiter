@@ -21,8 +21,12 @@ public enum Setting
 	OLD_MOB_KILLER_AFFECTED_MOBS("OldMobKiller.AffectedMobs", Arrays.asList(new String[] { "Zombie", "Skeleton", "Creeper", "Spider" })),
 	OLD_MOB_KILLER_NEAR_MOBS_SEARCH_RANGE("OldMobKiller.NearMobSearchRangeBlocks", 4),
 	OLD_MOB_KILLER_NEAR_MOBS_COUNT("OldMobKiller.NearMobKillCount", 4),
-	
-	ENABLED_WORLDS("EnabledWorlds", null),
+    OLD_MOB_KILLER_CULL_AGGRAVATED("OldMobKiller.CullAggravatedMobs", true),
+    OLD_MOB_KILLER_CULL_NONAGGRAVATED("OldMobKiller.CullNonAggravatedMobs", true),
+    OLD_MOB_KILLER_CULL_PICKED_ITEMS("OldMobKiller.CullPickedItemsMobs", true),
+
+
+    ENABLED_WORLDS("EnabledWorlds", null),
 
 	MESSAGE_NO_PERMISSION("Messages.NoPermission", "&cNo permission!"),
 	MESSAGE_MOB_COUNT_LINE("Messages.MobCountLine", "&6<MobName>: <ChunkCount>&7/<ChunkLimit> in chunk, &6<ViewDistanceCount>&7/<ViewDistanceLimit> in view distance."),
