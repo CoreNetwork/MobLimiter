@@ -90,7 +90,7 @@ public class OldMobKiller implements Listener {
 										
 					int age = mob.getTicksLived();
 														
-					if (age > killTreshold)
+					if (age > killTreshold && getNumberOfNearbyMobs(mob) > nearMobsCount)
 					{
                         boolean aggravated = hasPlayerTarget(creature);
 						if (((aggravated && killAggravatedMobs) || (!aggravated && killNonAggravatedMobs)) && (killPickedItemsMobs || !hasPlayerTarget(creature)))
